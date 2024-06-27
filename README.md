@@ -1,13 +1,6 @@
 # littlelemon
 Reservation system for a restaturant
 
-
-# littlelemonapirest 
-
-"menu": "http://127.0.0.1:8000/api/menu/",
-"tables": "http://127.0.0.1:8000/api/tables/",
-"reservations": "http://127.0.0.1:8000/api/reservations/
-
 # Cómo hacer? 
 1) Crea un entorno virtual python -m venv env
 2) Inicia el entorno virtual env/Scripts/activate (powershell)
