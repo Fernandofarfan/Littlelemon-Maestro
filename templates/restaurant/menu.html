@@ -1,0 +1,33 @@
+{%extends 'bases/base.html'%}
+{% load static %}
+{%block contents%}
+<div class="menu_container">
+    <h1 class="menu_title">Menu</h1>
+    <div class="menu_categories">
+        {%for category in categories%}
+        <a href="{%url 'menu_category' category.id %}" class="menu_category">{{category.name}}</a>
+        {%endfor%}
+    </div>
+    <div class="menu_cards_container">
+    {% for item in items %}
+    
+
+    <div class="menu_card">
+            <img src="{{item.image.url}}" alt="{{item.name}}">
+        
+        <h3 class="menu_item_name">
+            {{item.title}}
+        </h3>
+        {% comment %} <p class="menu_item_description">
+            {{item.description}}
+        </p> {% endcomment %}
+        <p class="menu_item_price">
+            ${{item.price}}
+        </p>
+        
+    </div>
+
+    {% endfor %}
+</div>
+</div>
+{%endblock%}

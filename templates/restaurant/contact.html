@@ -1,0 +1,48 @@
+{% extends "bases/base.html" %}
+{% load static %} 
+{% block contents %}
+    <section class="contact_container">
+        <div class="contact_section">
+            <div class="contact_data">
+                <h2>Contact us</h2>                
+                <p>Email: fidevp27@gmail.com
+                <p>Phone: +541234567890</p>
+                <p>Address: Federico Lacroze 1600, Buenos Aires, Argentina</p>
+                <p>Business hours:</p>
+                <p class="business_hour">Monday to Friday: 11:00 - 21:00</p>
+                <p class="business_hour">Saturday: 11:00 - 00:00</p>
+                <p class="business_hour">Sunday: 11:00 - 23:00</p>
+                
+            </div>
+        </div>
+        <div class="contact_section">
+            <div class="contact_form">
+                <h2>Get in touch</h2>
+                <form action="" method="post">
+                    {% csrf_token %}                    
+                        <label for="name">Name</label>
+                        <input type="text" name="name" id="name" required>
+                        <label for="email">Email</label>
+                        <input type="email" name="email" id="email" required>
+                        <label for="phone">Phone</label>
+                        <input type="text" name="phone" id="phone" required>
+                        <label for="message">Message</label>
+                        <textarea name="message" id="message" required></textarea>
+                        <div class="terms_section">
+                            <input type="checkbox" name="terms" id="terms" required>
+                            <p for="terms">I accept the processing of personal data</p>
+                        </div>
+                        <button type="submit">Send</button>
+                    
+                </form>
+            </div>
+        </div>
+        <div class="contact_section">
+            <div class="contact_map">
+                <h2>Our location</h2>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3285.619418040993!2d-58.440784223618316!3d-34.563190272968825!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb5b791ca98c9%3A0x834b9e3eb41e0c2!2sFederico%20Lacroze%201600%2C%20C1426%20CPO%2C%20Cdad.%20Aut%C3%B3noma%20de%20Buenos%20Aires!5e0!3m2!1ses-419!2sar!4v1712666440485!5m2!1ses-419!2sar" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>    
+
+    </section>
+{% endblock %}
