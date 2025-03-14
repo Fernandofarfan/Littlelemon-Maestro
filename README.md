@@ -1,5 +1,5 @@
 # littlelemon
-Reservation system for a restaturant
+Reservation system for a restaurant 
 
 # Cómo hacer? 
 1) Crea un entorno virtual python -m venv env
