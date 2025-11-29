@@ -1,0 +1,151 @@
+{% extends "bases/base.html" %}
+{% load static %}
+{% block contents %}
+<div class="book_container">
+    <div class="book_header">
+        <h1 class="book_title">Reservar Mesa</h1>
+        <p class="book_subtitle">Complete el formulario para reservar su mesa</p>
+    </div>
+    
+    <div class="book_content">
+        <div class="book_form_container">
+            <form method="post" id="reservationForm">
+                {% csrf_token %}
+                
+                <div class="form_group">
+                    <label for="{{ form.name.id_for_label }}">{{ form.name.label }}</label>
+                    {{ form.name }}
+                    {% if form.name.errors %}
+                        <div class="form_error">{{ form.name.errors }}</div>
+                    {% endif %}
+                </div>
+                
+                <div class="form_group">
+                    <label for="{{ form.no_of_guest.id_for_label }}">{{ form.no_of_guest.label }}</label>
+                    {{ form.no_of_guest }}
+                    {% if form.no_of_guest.errors %}
+                        <div class="form_error">{{ form.no_of_guest.errors }}</div>
+                    {% endif %}
+                </div>
+                
+                <div class="form_row">
+                    <div class="form_group">
+                        <label for="{{ form.booking_date.id_for_label }}">{{ form.booking_date.label }}</label>
+                        {{ form.booking_date }}
+                        {% if form.booking_date.errors %}
+                            <div class="form_error">{{ form.booking_date.errors }}</div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="form_group">
+                        <label for="{{ form.booking_time.id_for_label }}">{{ form.booking_time.label }}</label>
+                        {{ form.booking_time }}
+                        {% if form.booking_time.errors %}
+                            <div class="form_error">{{ form.booking_time.errors }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <div class="form_group">
+                    <label for="{{ form.table.id_for_label }}">{{ form.table.label }}</label>
+                    {{ form.table }}
+                    {% if form.table.errors %}
+                        <div class="form_error">{{ form.table.errors }}</div>
+                    {% endif %}
+                </div>
+                
+                <div id="availabilityMessage" class="availability_message"></div>
+                
+                <div class="form_actions">
+                    <button type="submit" class="btn btn_primary">Confirmar Reserva</button>
+                    <a href="{% url 'home_restaurant' %}" class="btn btn_secondary">Cancelar</a>
+                </div>
+            </form>
+        </div>
+        
+        <div class="book_info">
+            <div class="info_card">
+                <h3>Horario de Atención</h3>
+                <p>Lunes a Viernes: 11:00 - 21:00</p>
+                <p>Sábado: 11:00 - 00:00</p>
+                <p>Domingo: 11:00 - 23:00</p>
+            </div>
+            
+            <div class="info_card">
+                <h3>Mesas Disponibles</h3>
+                {% if available_tables %}
+                    <ul class="tables_list">
+                        {% for table in available_tables %}
+                            <li>{{ table.name }} - Capacidad: {{ table.no_of_seats }} personas</li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>No hay mesas disponibles en este momento</p>
+                {% endif %}
+            </div>
+            
+            <div class="info_card">
+                <h3>Política de Reservas</h3>
+                <ul>
+                    <li>Las reservas deben hacerse con al menos 1 hora de anticipación</li>
+                    <li>Puede cancelar su reserva hasta 2 horas antes</li>
+                    <li>Por favor llegue 10 minutos antes de su hora reservada</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Verificar disponibilidad en tiempo real
+document.addEventListener('DOMContentLoaded', function() {
+    const dateInput = document.getElementById('{{ form.booking_date.id_for_label }}');
+    const timeInput = document.getElementById('{{ form.booking_time.id_for_label }}');
+    const guestsInput = document.getElementById('{{ form.no_of_guest.id_for_label }}');
+    const tableSelect = document.getElementById('{{ form.table.id_for_label }}');
+    const messageDiv = document.getElementById('availabilityMessage');
+    
+    function checkAvailability() {
+        const date = dateInput.value;
+        const time = timeInput.value;
+        const guests = guestsInput.value;
+        
+        if (date && time && guests) {
+            fetch(`{% url 'check_availability' %}?date=${date}&time=${time}&guests=${guests}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.available) {
+                        messageDiv.className = 'availability_message success';
+                        messageDiv.textContent = data.message;
+                        
+                        // Actualizar opciones de mesa
+                        const currentValue = tableSelect.value;
+                        tableSelect.innerHTML = '<option value="">Seleccione una mesa</option>';
+                        data.tables.forEach(table => {
+                            const option = document.createElement('option');
+                            option.value = table.id;
+                            option.textContent = `${table.name} - Capacidad: ${table.capacity} personas`;
+                            tableSelect.appendChild(option);
+                        });
+                        
+                        // Restaurar selección si sigue disponible
+                        if (currentValue) {
+                            tableSelect.value = currentValue;
+                        }
+                    } else {
+                        messageDiv.className = 'availability_message error';
+                        messageDiv.textContent = data.message;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+    }
+    
+    dateInput.addEventListener('change', checkAvailability);
+    timeInput.addEventListener('change', checkAvailability);
+    guestsInput.addEventListener('change', checkAvailability);
+});
+</script>
+{% endblock %}

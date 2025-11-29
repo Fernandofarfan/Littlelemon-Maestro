@@ -1,0 +1,89 @@
+{% extends "bases/base.html" %}
+{% load static %}
+{% block contents %}
+<div class="reservations_container">
+    <div class="reservations_header">
+        <h1 class="reservations_title">Mis Reservas</h1>
+        <a href="{% url 'book_table' %}" class="btn btn_primary">Nueva Reserva</a>
+    </div>
+
+    {% if future_reservations %}
+    <section class="reservations_section">
+        <h2 class="section_title">Próximas Reservas</h2>
+        <div class="reservations_grid">
+            {% for reservation in future_reservations %}
+            <div class="reservation_card future">
+                <div class="reservation_header">
+                    <h3>{{ reservation.table.name }}</h3>
+                    <span class="reservation_status active">Activa</span>
+                </div>
+                <div class="reservation_details">
+                    <div class="detail_item">
+                        <span class="detail_label">Fecha:</span>
+                        <span class="detail_value">{{ reservation.booking_date|date:"d/m/Y" }}</span>
+                    </div>
+                    <div class="detail_item">
+                        <span class="detail_label">Hora:</span>
+                        <span class="detail_value">{{ reservation.booking_time|time:"H:i" }}</span>
+                    </div>
+                    <div class="detail_item">
+                        <span class="detail_label">Personas:</span>
+                        <span class="detail_value">{{ reservation.no_of_guest }}</span>
+                    </div>
+                    <div class="detail_item">
+                        <span class="detail_label">Nombre:</span>
+                        <span class="detail_value">{{ reservation.name }}</span>
+                    </div>
+                    <div class="detail_item">
+                        <span class="detail_label">Capacidad de mesa:</span>
+                        <span class="detail_value">{{ reservation.table.no_of_seats }} personas</span>
+                    </div>
+                </div>
+                <div class="reservation_actions">
+                    <a href="{% url 'cancel_reservation' reservation.id %}" class="btn btn_danger">Cancelar Reserva</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% else %}
+    <div class="no_reservations">
+        <img src="{% static 'assets/no_reservations.png' %}" alt="Sin reservas" class="no_reservations_img"
+            onerror="this.style.display='none'">
+        <h2>No tienes reservas próximas</h2>
+        <p>¿Listo para disfrutar de una experiencia culinaria única?</p>
+        <a href="{% url 'book_table' %}" class="btn btn_primary">Reservar Ahora</a>
+    </div>
+    {% endif %}
+
+    {% if past_reservations %}
+    <section class="reservations_section">
+        <h2 class="section_title">Historial de Reservas</h2>
+        <div class="reservations_grid">
+            {% for reservation in past_reservations %}
+            <div class="reservation_card past">
+                <div class="reservation_header">
+                    <h3>{{ reservation.table.name }}</h3>
+                    <span class="reservation_status completed">Completada</span>
+                </div>
+                <div class="reservation_details">
+                    <div class="detail_item">
+                        <span class="detail_label">Fecha:</span>
+                        <span class="detail_value">{{ reservation.booking_date|date:"d/m/Y" }}</span>
+                    </div>
+                    <div class="detail_item">
+                        <span class="detail_label">Hora:</span>
+                        <span class="detail_value">{{ reservation.booking_time|time:"H:i" }}</span>
+                    </div>
+                    <div class="detail_item">
+                        <span class="detail_label">Personas:</span>
+                        <span class="detail_value">{{ reservation.no_of_guest }}</span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+</div>
+{% endblock %}

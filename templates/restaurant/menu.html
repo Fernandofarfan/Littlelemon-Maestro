@@ -9,25 +9,32 @@
         {%endfor%}
     </div>
     <div class="menu_cards_container">
-    {% for item in items %}
-    
+        {% for item in items %}
 
-    <div class="menu_card">
+
+        <div class="menu_card">
+            {% if item.image %}
             <img src="{{item.image.url}}" alt="{{item.name}}">
-        
-        <h3 class="menu_item_name">
-            {{item.title}}
-        </h3>
-        {% comment %} <p class="menu_item_description">
-            {{item.description}}
-        </p> {% endcomment %}
-        <p class="menu_item_price">
-            ${{item.price}}
-        </p>
-        
-    </div>
+            {% else %}
+            <div class="no-image-placeholder"
+                style="height: 200px; background-color: #eee; display: flex; align-items: center; justify-content: center; color: #888;">
+                <span>Sin imagen</span>
+            </div>
+            {% endif %}
 
-    {% endfor %}
-</div>
+            <h3 class="menu_item_name">
+                {{item.title}}
+            </h3>
+            {% comment %} <p class="menu_item_description">
+                {{item.description}}
+            </p> {% endcomment %}
+            <p class="menu_item_price">
+                ${{item.price}}
+            </p>
+
+        </div>
+
+        {% endfor %}
+    </div>
 </div>
 {%endblock%}

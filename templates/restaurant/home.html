@@ -1,24 +1,25 @@
-
 {% extends "bases/base.html" %}
-{% load static %} 
-{% block contents %} 
+{% load static %}
+{% block contents %}
 <section class="home">
     <div class="home_text">
         <div class="home_text_title">
             <h1>Embark on a Culinary Adventure: Discover Unique Flavors and Unforgettable Experiences in Every Bite</h1>
         </div>
         <div class="home_text_content">
-            <p>Embark on a culinary expedition where tradition meets innovation in every dish. Experience a symphony of flavors crafted with the finest ingredients, all served in a warm, inviting atmosphere. Your journey to unforgettable dining begins here.</p>
+            <p>Embark on a culinary expedition where tradition meets innovation in every dish. Experience a symphony of
+                flavors crafted with the finest ingredients, all served in a warm, inviting atmosphere. Your journey to
+                unforgettable dining begins here.</p>
         </div>
         <div class="home_text_button">
             <a href="" class="btn">Book a table</a>
         </div>
     </div>
     <div class="home_img">
-        
+
     </div>
 </section>
-<section class="cards"> 
+<section class="cards">
     <div class="card">
         <img src="{% static 'restaurant/images/chef_card.png' %}" alt="chef image">
         <h3 class="card_title">Master Chefs</h3>
@@ -27,7 +28,8 @@
     <div class="card">
         <img src="{% static 'restaurant/images/eco_card.png' %}" alt="Eco friendly image">
         <h3 class="card_title">Sustainability</h3>
-        <p class="card_text">Learn how we're committed to eco-friendly practices and sourcing local ingredients to protect the planet</p>
+        <p class="card_text">Learn how we're committed to eco-friendly practices and sourcing local ingredients to
+            protect the planet</p>
     </div>
     <div class="card">
         <img src="{% static 'restaurant/images/quality_card.png' %}" alt="quality image">
@@ -37,40 +39,49 @@
     <div class="card">
         <img src="{% static 'restaurant/images/daily_special_card.png' %}" alt="daily special">
         <h3 class="card_title">Daily Specials</h3>
-        <p class="card_text">Delight in our chef's daily creations, featuring the freshest seasonal ingredients and innovative flavors</p>
+        <p class="card_text">Delight in our chef's daily creations, featuring the freshest seasonal ingredients and
+            innovative flavors</p>
     </div>
 </section>
-<section class="about">    
-        <div class="about_text">
-            <div class="about_text_title">
-                <h2>Who are we?</h2>
-            </div>
-            <div class="about_text_content">
-                <p>In our restaurant, we are devoted to conjuring exquisite dining encounters for both lunch and dinner, designed to enchant the senses. Our culinary artisans are committed to the art of creating distinctive dishes that highlight the pinnacle of local and sustainable ingredients. We believe that both midday and evening meals should transcend the ordinary, becoming a voyage of culinary delight. We warmly invite you to partake in this elegant journey of taste exploration with us.</p>
-            </div>
+<section class="about">
+    <div class="about_text">
+        <div class="about_text_title">
+            <h2>Who are we?</h2>
         </div>
-        <div class="about_img">
-            <img src="{% static 'restaurant/images/about_food1.jpg' %}" alt="about food image">
-            <img src="{% static 'restaurant/images/about_food2.jpg' %}" alt="about food image">
-            <img src="{% static 'restaurant/images/about_food3.jpg' %}" alt="about food image">
-            <img src="{% static 'restaurant/images/about_food4.jpg' %}" alt="about food image">
+        <div class="about_text_content">
+            <p>In our restaurant, we are devoted to conjuring exquisite dining encounters for both lunch and dinner,
+                designed to enchant the senses. Our culinary artisans are committed to the art of creating distinctive
+                dishes that highlight the pinnacle of local and sustainable ingredients. We believe that both midday and
+                evening meals should transcend the ordinary, becoming a voyage of culinary delight. We warmly invite you
+                to partake in this elegant journey of taste exploration with us.</p>
         </div>
+    </div>
+    <div class="about_img">
+        <img src="{% static 'restaurant/images/about_food1.jpg' %}" alt="about food image">
+        <img src="{% static 'restaurant/images/about_food2.jpg' %}" alt="about food image">
+        <img src="{% static 'restaurant/images/about_food3.jpg' %}" alt="about food image">
+        <img src="{% static 'restaurant/images/about_food4.jpg' %}" alt="about food image">
     </div>
 </section>
 
 <section class="team">
     <div class="text_container">
         <div class="title_team">
-            <h2>Meet Our Team</h2>  
-        </div> 
+            <h2>Meet Our Team</h2>
+        </div>
         <div class="text_team">
             <p>
-                At the heart of our restaurant lies a cadre of culinary virtuosos, each a master of their craft. Our chefs are the alchemists behind the scenes, transforming simple ingredients into gastronomic gold. With a tapestry of diverse backgrounds and culinary disciplines, they unite to compose a harmony of flavors in every dish presented. We are proud to showcase the dedication, artistry, and culinary flair that our team infuses into every meal. Join us in celebrating the talent and passion that make our dining experience truly extraordinary.</p>
+                At the heart of our restaurant lies a cadre of culinary virtuosos, each a master of their craft. Our
+                chefs are the alchemists behind the scenes, transforming simple ingredients into gastronomic gold. With
+                a tapestry of diverse backgrounds and culinary disciplines, they unite to compose a harmony of flavors
+                in every dish presented. We are proud to showcase the dedication, artistry, and culinary flair that our
+                team infuses into every meal. Join us in celebrating the talent and passion that make our dining
+                experience truly extraordinary.</p>
         </div>
     </div>
-   
-    
-    
+
+
+
     <div class="team_container">
         <div class="team_card">
             <img src="{% static 'restaurant/images/chefw1.jpg' %}" alt="chef1">
@@ -94,5 +105,4 @@
         </div>
     </div>
 </section>
-{% endblock %} 
-    
+{% endblock %}

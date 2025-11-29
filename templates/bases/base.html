@@ -1,77 +1,89 @@
 {% load static %}
-<html lang="en">
+<!DOCTYPE html>
+<html lang="es">
+
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
-    <meta name="keywords" content="resturant, food, health">
-    <meta name="description" content="Little Lemon is a restaurant that offers a variety of dishes.">
+    <meta name="keywords" content="restaurant, food, health, reservas, comida">
+    <meta name="description"
+        content="Little Lemon es un restaurante que ofrece una variedad de platos únicos y experiencias culinarias inolvidables.">
     <link rel="icon" href="{% static 'assets/littlelemon_favicon.png'%}" type="image/x-icon">
-    <link rel="stylesheet" href="{% static 'restaurant/styles/style.css' %}">    
-    <title>Little Lemon</title>   
+    <link rel="stylesheet" href="{% static 'restaurant/styles/style.css' %}">
+    <title>Little Lemon - Restaurante</title>
 </head>
+
 <body>
     <nav class="navbar">
         <div class="logo">
-            <img src="{% static 'assets/logo2_littlelemon.png' %}" alt="img">
+            <img src="{% static 'assets/logo2_littlelemon.png' %}}" alt="Little Lemon Logo">
         </div>
         <div class="menu_item">
-            <a href="{% url 'home_restaurant' %}">Home</a>      
-            <a href="{%url 'menu'%}">Menu</a>
-            <a href="about.php" class="nav_book">Book now</a>
-            <a href="{%url 'contact'%}">Contact</a>
+            <a href="{% url 'home_restaurant' %}">Inicio</a>
+            <a href="{% url 'menu' %}">Menú</a>
+            <a href="{% url 'book_table' %}" class="nav_book">Reservar</a>
+            <a href="{% url 'contact' %}">Contacto</a>
             {% if not request.user.is_authenticated %}
-            <a href="{% url 'signin'%}">Login</a>
-            <a href="{% url 'register'%}">Register</a>
+            <a href="{% url 'signin' %}">Iniciar Sesión</a>
+            <a href="{% url 'register' %}">Registrarse</a>
             {% else %}
-            <span class="welcome_text">Welcome, {{ request.user.username }}
-            <a href="{% url 'logoff'%}"><img src="{% static 'assets/logout.png' %}" alt="img"></a>
+            <a href="{% url 'my_reservations' %}">Mis Reservas</a>
+            <span class="welcome_text">Bienvenido, {{ request.user.username }}
+                <a href="{% url 'logoff' %}"><img src="{% static 'assets/logout.png' %}" alt="Cerrar sesión"></a>
             </span>
             {% endif %}
-
         </div>
     </nav>
-    {% if messages %}
-        {% for message in messages %}
-            <div class="alert {{ message.tags }}">
-                {{ message }}
-            </div>
-        {% endfor %}
-    {% endif %}
-    {% block contents %}  
 
-    {% endblock %}
-    
-    <footer>        
-        <div class="footer_item">
-            <h3 class= "h3_title">Little Lemon</h3>
-            <p class="p_subtitle">Little Lemon is a restaurant that offers a variety of dishes. We are located in the heart of the city.</p>
+    {% if messages %}
+    <div class="messages_container">
+        {% for message in messages %}
+        <div class="alert alert_{{ message.tags }}">
+            {{ message }}
         </div>
-        
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% block contents %}
+    {% endblock %}
+
+    <footer>
         <div class="footer_item">
-            <h3>Contact</h3>
-            <p>Address: 1234 Lemon Street, City, Country</p>
-            <p>Phone: +123 456 7890</p>
+            <h3 class="h3_title">Little Lemon</h3>
+            <p class="p_subtitle">Little Lemon es un restaurante que ofrece una variedad de platos. Estamos ubicados en
+                el corazón de la ciudad.</p>
+        </div>
+
+        <div class="footer_item">
+            <h3>Contacto</h3>
+            <p>Dirección: 1234 Lemon Street, Ciudad, País</p>
+            <p>Teléfono: +123 456 7890</p>
             <div class="contact-rrss">
                 <a href="#"><img src="{% static 'assets/youtube_logo.png' %}" alt="youtube"></a>
                 <a href="#"><img src="{% static 'assets/x_logo.png' %}" alt="twitter"></a>
-                <a href="#"><img src="{% static 'assets/facebook_logo.png' %}" alt="facebook"></a>                
+                <a href="#"><img src="{% static 'assets/facebook_logo.png' %}" alt="facebook"></a>
                 <a href="#"><img src="{% static 'assets/instagram_logo.png' %}" alt="instagram"></a>
             </div>
         </div>
+
         <div class="footer_item">
-            <h3>Opening hours</h3>
-            <p>Monday to Friday: 11:00 - 21:00</p>
-            <p>Saturday: 11:00 - 00:00</p>
-            <p>Sunday: 11:00 - 23:00</p>
+            <h3>Horario de Atención</h3>
+            <p>Lunes a Viernes: 11:00 - 21:00</p>
+            <p>Sábado: 11:00 - 00:00</p>
+            <p>Domingo: 11:00 - 23:00</p>
         </div>
+
         <div class="footer_item">
             <h3>Newsletter</h3>
-            <p>Savor the flavor of our kitchen secrets and stay updated with the latest news about our services</p>
-            <form action="newsletter.php" method="post">
-                <input type="email" name="email" placeholder="Enter your email" required>
-                <button type="submit">Subscribe</button>
+            <p>Saborea el sabor de nuestros secretos culinarios y mantente actualizado con las últimas noticias</p>
+            <form action="#" method="post">
+                {% csrf_token %}
+                <input type="email" name="email" placeholder="Ingresa tu email" required>
+                <button type="submit">Suscribirse</button>
             </form>
         </div>
     </footer>
 </body>
+
 </html>
